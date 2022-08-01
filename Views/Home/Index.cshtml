@@ -1,8 +1,35 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    var username = User.Claims
+                    .Where(c => c.Type == "username")
+                        .Select(c => c.Value).SingleOrDefault();
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="">
+    <h1>Selamat datang @User.Identity.Name</h1>
+    <h2>Username anda adalah @username</h2>
+    @*<h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+    <table style="width: 100%;" class="table table-responsive">
+        <thead>
+            <tr>
+                <th>NPP</th>
+                <th>Nama</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var item in Model.table)
+           {
+                  <tr>
+                      <td>@item.npp</td>
+                      <td>@item.nama</td>
+                      <td>
+                          <a href="/Home/Detail?npp=@item.npp" class="btn btn-sm btn-info">Detail</a>
+                      </td>
+                  </tr>
+           }
+        </tbody>
+    </table>
 </div>
