@@ -31,5 +31,34 @@ namespace TestingAplikasi.DAO
                 }
             }
         }
+
+        public bool simpanKaryawan(UserModel mdl)
+        {
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.koneksi))
+            {
+                try
+                {
+                    string query = @"INSERT INTO [simka].[MST_KARYAWAN]
+                                       ([NPP]
+                                       ,[NAMA_LENGKAP_GELAR]
+                                       ,[USERNAME]
+                                       ,[PASSWORD])
+                                 VALUES
+                                       (@npp, @nama, @npp, @password)";
+
+                    var data = conn.Execute(query, mdl);
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
     }
 }

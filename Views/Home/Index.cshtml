@@ -6,30 +6,41 @@
                         .Select(c => c.Value).SingleOrDefault();
 }
 
-<div class="">
-    <h1>Selamat datang @User.Identity.Name</h1>
-    <h2>Username anda adalah @username</h2>
-    @*<h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
-    <table style="width: 100%;" class="table table-responsive">
-        <thead>
-            <tr>
-                <th>NPP</th>
-                <th>Nama</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-           @foreach (var item in Model.table)
-           {
-                  <tr>
-                      <td>@item.npp</td>
-                      <td>@item.nama</td>
-                      <td>
-                          <a href="/Home/Detail?npp=@item.npp" class="btn btn-sm btn-info">Detail</a>
-                      </td>
-                  </tr>
-           }
-        </tbody>
-    </table>
+@section Styles{
+    <style>
+        .btntambah{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <a href="/Home/Tambah" class="btn btn-sm btn-success btntambah">Tambah</a> 
+        <a href="/Home/ExportSeminar" class="btn btn-sm btn-warning btntambah">Excel</a>
+        <a href="/Home/CetakPdf" class="btn btn-sm btn-info btntambah">Pdf</a>
+        <table style="width: 100%;" class="table table-responsive-lg table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>NPP</th>
+                    <th>Nama</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+               @foreach (var item in Model.table)
+               {
+                      <tr>
+                          <td>@item.npp</td>
+                          <td>@item.nama</td>
+                          <td>
+                              <a href="/Home/Detail?npp=@item.npp" class="btn btn-sm btn-info">Detail</a>
+                          </td>
+                      </tr>
+               }
+            </tbody>
+        </table>
+    </div>
 </div>

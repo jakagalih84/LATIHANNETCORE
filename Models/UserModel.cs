@@ -7,4 +7,19 @@
         public string password { get; set; }
         public string deskripsi { get; set; } 
     }
+
+    public class MDLMENU
+    {
+        public int ID_SI_MENU { get; set; }
+        public string DESKRIPSI { get; set; }
+        public string LINK { get; set; }
+    }
+
+    public class MDLSUBMENU
+    {
+        public int ID_SI_SUBMENU { get; set; }
+        public int ID_SI_MENU { get; set; }
+        public string DESKRIPSI { get; set; }
+        public string LINK { get; set; }
+    }
 }

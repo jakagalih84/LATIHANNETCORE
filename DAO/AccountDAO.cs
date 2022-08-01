@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using TestingAplikasi.Models;
 
@@ -21,6 +22,68 @@ namespace TestingAplikasi.DAO
                                     WHERE a.NPP = @username";
                     var param = new { username = npp };
                     var data = conn.QueryFirstOrDefault<UserModel>(query, param);
+
+                    return data;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
+        public List<MDLMENU> GetMenuKaryawan(string npp)
+        {
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.koneksi))
+            {
+                try
+                {
+                    string query = @"SELECT DISTINCT b.*
+                                    FROM siatmax.TBL_SISTEM_INFORMASI a
+                                    JOIN siatmax.TBL_SI_MENU b ON a.ID_SISTEM_INFORMASI = b.ID_SISTEM_INFORMASI
+                                    JOIN siatmax.TBL_SI_SUBMENU c ON b.ID_SI_MENU = c.ID_SI_MENU
+                                    JOIN siatmax.TBL_ROLE_SUBMENU d ON d.ID_SI_SUBMENU = c.ID_SI_SUBMENU
+                                    JOIN siatmax.REF_ROLE e ON e.ID_ROLE = d.ID_ROLE
+                                    JOIN siatmax.TBL_USER_ROLE f ON f.ID_ROLE = e.ID_ROLE
+                                    JOIN simka.MST_KARYAWAN g ON g.NPP = f.NPP
+                                    WHERE a.ID_SISTEM_INFORMASI = 2 AND e.ID_ROLE = 7";
+                    var param = new { username = npp };
+                    var data = conn.Query<MDLMENU>(query, param).AsList();
+
+                    return data;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
+        public List<MDLSUBMENU> GetSubMenuKaryawan(string npp)
+        {
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.koneksi))
+            {
+                try
+                {
+                    string query = @"SELECT DISTINCT c.*
+                                    FROM siatmax.TBL_SISTEM_INFORMASI a
+                                    JOIN siatmax.TBL_SI_MENU b ON a.ID_SISTEM_INFORMASI = b.ID_SISTEM_INFORMASI
+                                    JOIN siatmax.TBL_SI_SUBMENU c ON b.ID_SI_MENU = c.ID_SI_MENU
+                                    JOIN siatmax.TBL_ROLE_SUBMENU d ON d.ID_SI_SUBMENU = c.ID_SI_SUBMENU
+                                    JOIN siatmax.REF_ROLE e ON e.ID_ROLE = d.ID_ROLE
+                                    JOIN siatmax.TBL_USER_ROLE f ON f.ID_ROLE = e.ID_ROLE
+                                    JOIN simka.MST_KARYAWAN g ON g.NPP = f.NPP
+                                    WHERE a.ID_SISTEM_INFORMASI = 2 AND e.ID_ROLE = 7";
+                    var param = new { username = npp };
+                    var data = conn.Query<MDLSUBMENU>(query, param).AsList();
 
                     return data;
                 }

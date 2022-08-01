@@ -1,0 +1,137 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Daftar Karyawan</title>
+    <style>
+        .font-univ {
+            font-family: 'Eras UAJY';
+        }
+
+        .header-cetak {
+            text-align: center;
+            font-family: Cambria;
+            border-bottom: double;
+        }
+
+        .body-sertif {
+            text-align: center;
+        }
+
+        .p-keterangan {
+            font-family: 'Segoe Print';
+            font-size: 24px;
+        }
+
+        .p-nama {
+            font-size: 40px;
+            /*font-weight: bold;*/
+            font-family: 'Tahoma';
+        }
+
+        .p-ttd {
+            font-family: 'Segoe Print';
+            font-size: 26px;
+        }
+
+        .divlogo {
+            /*display: inline-block;
+            vertical-align: top;
+            height: 120px;*/
+        }
+
+        .divhead {
+            text-align: center;
+            padding-top: 125px;
+        }
+
+        .divttd {
+            margin-top: 50px;
+        }
+
+        .classbody {
+            /*background-color: burlywood;*/
+        }
+
+        .divbody {
+            /*padding-top: 100px;
+            padding-bottom: 115px;
+            margin-left: 135px;
+            margin-right: 135px;*/
+        }
+
+        .imgttd {
+            height: 100px;
+            float: left;
+        }
+
+        .table-logo {
+            width: 100%;
+        }
+
+        .tdlogo1 {
+            width: 50%;
+        }
+
+        .tdlogo2 {
+            width: 50%;
+        }
+
+        .imglogo {
+            height: 250px;
+        }
+
+        .div-qr {
+        }
+
+        .imgqrcode {
+            height: 100px;
+            float: left;
+        }
+
+        .pcode {
+            font-family: 'Tahoma';
+            padding-top: 5px;
+            font-size: 20px;
+            padding-right: 5px;
+            float: right;
+        }
+
+        .p-judul {
+            font-size: 26px;
+            font-family: 'Tahoma';
+        }
+
+        .p-tanggal {
+            font-family: 'Segoe Print';
+            font-size: 26px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="classbody">
+    <div class="divbody">
+        <table style="width: 100%;" >
+            <thead>
+                <tr>
+                    <th>NPP</th>
+                    <th>Nama</th>
+                </tr>
+            </thead>
+            <tbody>
+               @foreach (var item in Model)
+               {
+                      <tr>
+                          <td>@item.npp</td>
+                          <td>@item.nama</td>
+                      </tr>
+               }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
