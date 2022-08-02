@@ -40,9 +40,25 @@ namespace TestingAplikasi.Controllers
         {
             dynamic objek = new ExpandoObject();
             objek.npp = npp;
-            objek.id = "01";
+            objek.data = dao.getKaryawanbyNpp(npp);
 
             return View(objek);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult UbahKaryawan(UserModel mdl)
+        {
+            if (dao.ubahKaryawan(mdl))
+            {
+                TempData["success"] = "Berhasil merubah data!";
+            }
+            else
+            {
+                TempData["error"] = "Gagal merubah data!";
+            }
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Tambah()

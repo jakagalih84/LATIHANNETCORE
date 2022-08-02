@@ -32,6 +32,30 @@ namespace TestingAplikasi.DAO
             }
         }
 
+        public UserModel getKaryawanbyNpp(string npp)
+        {
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.koneksi))
+            {
+                try
+                {
+                    string query = @"SELECT TOP 1 a.*, a.NAMA_LENGKAP_GELAR AS nama
+                                    FROM simka.MST_KARYAWAN a WHERE a.NPP = @npp";
+
+                    var data = conn.QueryFirstOrDefault<UserModel>(query, new { npp = npp});
+
+                    return data;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
         public bool simpanKaryawan(UserModel mdl)
         {
             using (SqlConnection conn = new SqlConnection(DBKoneksi.koneksi))
@@ -60,5 +84,32 @@ namespace TestingAplikasi.DAO
                 }
             }
         }
+
+        public bool ubahKaryawan(UserModel mdl)
+        {
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.koneksi))
+            {
+                try
+                {
+                    string query = @"UPDATE [simka].[MST_KARYAWAN] SET
+                                       [NAMA_LENGKAP_GELAR] = @nama
+                                       ,[PASSWORD] = @password
+                                    WHERE NPP = @npp";
+
+                    var data = conn.Execute(query, mdl);
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
     }
 }
